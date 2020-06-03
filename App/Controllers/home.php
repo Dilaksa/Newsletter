@@ -38,10 +38,9 @@ class Home extends Controller {
         $file = 'newsletter-list.txt';
         $contents = file_get_contents($file);
         $new_contents= "";
-        if( 
+        if( ($contents, $mail) !== false) {
 
-
-
+            
 
     }
 
@@ -129,4 +128,6 @@ class Home extends Controller {
         $this->view('home/newsletter_abmelden');
     }
 }
+
+
 
