@@ -1,4 +1,4 @@
-<form action="/site/testing/MVCTask/public/home/newsletter" method="POST">
+<form action="/Newsletter/public/home/newsletter" method="POST">
 	Vorname: <input name="Vorname" type="text" /><br>
 	Nachname: <input name="Nachname" type="text" /><br />	
 	Strasse: <input name="Strasse" type="text" /> <br>

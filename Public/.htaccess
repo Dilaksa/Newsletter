@@ -1,7 +1,7 @@
 Options -MultiViews
 RewriteEngine On 
 
-RewriteBase MVC_Test/Public
+RewriteBase Newsletter/Public
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

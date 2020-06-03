@@ -12,7 +12,7 @@
         }
 
         public function goto($controller, $method, $args = []) {
-            $base = '/site/testing/MVCTask/public';
+            $base = '/Newsletter/public';
             $location = 'http://' . $_SERVER['HTTP_HOST'] . $base . "/" . $controller . "/" . $method . "/" . implode("/", $args);
             header("Location: " . $location);
             exit;
