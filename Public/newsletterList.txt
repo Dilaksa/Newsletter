@@ -1,0 +1,3 @@
+AmyFischer@hotmail.com;Amy;Fischer;Musterweg 5;Frauenfeld
+janiKo@gmail.com;janina;koch;musterstr. 23;Bürglen
+jessM@gmail.com;jessie;messmer;holzweg 64;8950 Romanshorn

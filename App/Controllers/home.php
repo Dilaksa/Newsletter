@@ -21,28 +21,18 @@ class Home extends Controller {
     public function replacemail($oldmail, $newmail) {
         
         // read the entire file
-        $str = file_get_contents('newsletter-list.txt');
+        $str = file_get_contents('newsletterList.txt');
 
         // replace old mail with new mail
         $str=str_replace($oldmail, $newmail, $str);
         
         // rewrite the file
-        file_put_contents('newsletter-list.txt', $str);
+        file_put_contents('newsletterList.txt', $str);
 
         // go back to newsletter
         $this->goto('home', 'newsletter');
     }
 
-
-    public function deletemail($mail) {
-        $file = 'newsletter-list.txt';
-        $contents = file_get_contents($file);
-        $new_contents= "";
-        if( ($contents, $mail) !== false) {
-
-            
-
-    }
 
 
     
@@ -50,7 +40,7 @@ class Home extends Controller {
 
         // check if form was sent
         if(isset($_POST['Email'])){
-            $file = fopen('newsletter-list.txt', 'a+');
+            $file = fopen('newsletterList.txt', 'a+');
 
             // loop all lines and compare with form inputs
             $write = true;
@@ -68,10 +58,10 @@ class Home extends Controller {
                 // check if just mail is different
                 elseif($l[1] == $_POST['Vorname'] && $l[2] == $_POST['Nachname'] && $l[3] == $_POST['Strasse'] && trim($l[4]) == $_POST['Ort']) {
                     $write = false; // ask if mail should be replaced
-                    echo '
-                    Die gleiche Adresse mit einer anderen Email ist bereits vorhanden. Möchten Sie die Mail ersetzen?
-                    <br>
-                    <a href="/Newsletter/public/home/replacemail/'.$l[0].'/'.$_POST['Email'].'">Ja, überschreiben</a>';
+
+                    echo 'Die gleiche Adresse mit einer anderen Email ist bereits vorhanden. Möchten Sie die Mail ersetzen?';
+                    echo '<a href="/Newsletter/public/home/replacemail/'.$l[0].'/'.$_POST['Email'].'">Ja, überschreiben</a>';
+                   
                     break;
                 }
                      
@@ -79,7 +69,7 @@ class Home extends Controller {
             
 
             // write new line
-            if($write == 23){ 
+            if($write ){ 
                 fwrite($file, $_POST['Email'].';');
                 fwrite($file, $_POST['Vorname'].";");
                 fwrite($file, $_POST['Nachname'].";");
@@ -89,14 +79,39 @@ class Home extends Controller {
             }
         }
 
-        // render view
+        // render view  
         $this->view('home/newsletter');
+    }
+
+    public function deletemail($mail) {
+        $file = 'newsletterList.txt';
+        $contents = file_get_contents($file);
+        $new_contents= "";
+        if(isset($_POST['Email'])){
+            $file = fopen('newsletterList.txt', 'a+');
+
+            // loop all lines and compare with form inputs
+            $write = true;
+            while(!feof($file)){
+
+                // check if line is identical
+               /* if($l[0] == $_POST['Email']){
+                    $write = false;
+                   fwrite($file, $_POST['Email'].';'); 
+                }else{($l[0] == $_POST['Email'])
+                   $Email = true
+                    pass;   
+                }*/
+
+                
+            }
+        }
     }
     
     public function newsletter_abmelden(){
          // check if form was sent
          if(isset($_POST['Email'])){
-            $file = fopen('newsletter-list.txt', 'a+');
+            $file = fopen('newsletterList.txt', 'a+');
 
             // loop all lines and compare with form inputs
             $write = true;
@@ -110,7 +125,7 @@ class Home extends Controller {
                     $found = true; // dont write again
                     echo 'Wollen Sie wirklich abmelden?';
 
-                    <a href="/Newsletter/public/home/deletemail/'.$l[0].'/'.$_POST['Email'].'">Ja, abmelden</a>; // 
+                    echo '<a href="/Newsletter/public/home/deletemail/'.$l[0].'/'.$_POST['Email'].'">Ja, abmelden</a>'; // 
 
                     break;
 
@@ -119,15 +134,15 @@ class Home extends Controller {
           if ($found == false){   // email not exist
             echo 'Diese Mail ist noch nicht angemeldet'; 
            
-            <a href="/Newsletter/public/home/newsletter/"> Möchten Sie sich anmelden? </a>; // link to login 
+           echo '<a href="/Newsletter/public/home/newsletter/"> Möchten Sie sich anmelden? </a>'; // link to login 
 
           }
         }
+    }
 
     public function abmelden(){
         $this->view('home/newsletter_abmelden');
     }
 }
-
 
 
